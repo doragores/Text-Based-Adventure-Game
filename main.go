@@ -9,6 +9,12 @@ type Room struct {
 	Description string
 }
 
+func navigationMenu() {
+	fmt.Println("1. Look left")
+	fmt.Println("2. Look right")
+	fmt.Println("3. Look forward")
+	fmt.Println("4. Exit the room")
+}
 func main() {
 	groundFloor := Room{
 		Name:        "Ground Floor",
@@ -72,8 +78,8 @@ func main() {
 		}
 
 		fmt.Println("You are currently in:", currentPlace.Name)
-		fmt.Println("Description:", currentPlace.Description)
-		fmt.Println("Where do you want to go?\n")
+		fmt.Println("Description:", currentPlace.Description+"\n")
+		fmt.Println("Where do you want to go?")
 
 		switch currentPlace.Name {
 
@@ -107,10 +113,25 @@ func main() {
 				currentPlace = discoBall
 			}
 		case "Bankification Box meeting room":
-			fmt.Println("1. Hallway")
+			fmt.Println("1. Go back to the hallway\n2. Look around")
 			fmt.Scanln(&userInput)
 			if userInput == "1" {
 				currentPlace = hallway4th
+			} else {
+				for {
+					navigationMenu()
+					fmt.Scanln(&userInput)
+					if userInput == "1" {
+						fmt.Println("\nYou look left and spot a note 📝 The note says:\n`There's a secret in this room...`\n")
+					} else if userInput == "2" {
+						fmt.Println("\nYou look right, but there's nothing important to see.\n")
+					} else if userInput == "3" {
+						fmt.Println("\nYou look forward and see another note 📝:\n`To find the secret go to the terrace 👀`\n")
+					} else if userInput == "4" {
+						currentPlace = hallway4th
+						break
+					}
+				}
 			}
 		case "Disco Ball meeting room":
 			fmt.Println("1. Hallway")
