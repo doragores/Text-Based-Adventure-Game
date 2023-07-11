@@ -53,7 +53,7 @@ func main() {
 
 	bankificationBox := Room{
 		Name:        "Bankification Box meeting room",
-		Description: "This is the Bankification box meeting Room. From here you can go only back to the hallway.",
+		Description: "This is the Bankification box meeting Room. From here you can go only back to the hallway or have a look around.",
 	}
 
 	discoBall := Room{
@@ -64,7 +64,7 @@ func main() {
 
 	terrace := Room{
 		Name:        "Terrace",
-		Description: "This is the Terrace. From here you can only go back to the hallway.",
+		Description: "This is the Terrace. From here you can only go back to the hallway or have a look around.",
 	}
 
 	fmt.Println("Hey 👋 \nThis is a text game where you need to find a golden laptop in order to become a software engineer at Monzo," +
@@ -79,7 +79,7 @@ func main() {
 
 	switch userInput {
 	case "yes":
-		fmt.Println("Here we go! 🚀 To exit the game at any point, please type `Exit`.\n")
+		fmt.Println("Here we go! 🚀yes To exit the game at any point, please type `Exit`.\n")
 	case "no":
 		fmt.Println("Maybe next time. Goodbye 👋")
 	default:
@@ -90,6 +90,9 @@ func main() {
 	currentPlace = groundFloor
 
 	for {
+		if userInput == "backpack" {
+			fmt.Printf("Here's what you have in your backpack 🎒 %v\n", backpack)
+		}
 		if userInput == "Exit" {
 			fmt.Println("Maybe next time. Goodbye 👋")
 			break
@@ -98,7 +101,7 @@ func main() {
 		fmt.Println("You are currently in:", currentPlace.Name)
 		fmt.Println("Description:", currentPlace.Description+"\n")
 		if currentPlace != discoBall {
-			fmt.Println("Where do you want to go?")
+			fmt.Println("Where do you want to go! \nYou currently have a backpack with you and if you want to look at what you have in it, just type `backpack` at any point.")
 		}
 
 		switch currentPlace.Name {
@@ -196,9 +199,12 @@ func main() {
 					navigationMenu()
 					fmt.Scanln(&userInput)
 					if userInput == "1" {
-						fmt.Println("\nYou look left and see the sunset 🌇.It's beautiful isn't it?\n")
+						fmt.Println("\nYou look left and see the sunset 🌇.It's beautiful isn't it...\n")
 					} else if userInput == "2" {
-						fmt.Println("\nYou look right, but there's nothing important to see, just a few coworkers chatting and having drinks.\n")
+						fmt.Println("\nYou look right, but there's nothing important to see, just a few coworkers chatting and having drinks.\nYou realise you could actually use " +
+							"a drink, so you grab a can of coke and put into your backpack 🎒")
+						item := "coke"
+						backpack = append(backpack, item)
 					} else if userInput == "3" {
 						fmt.Println("\nYou look forward and spot a shinny object... As you look closer you notice it's a key! 🔑 " +
 							"Do you want to put it in your backpack? [Yes/No]\n")
