@@ -89,7 +89,9 @@ func main() {
 	var currentPlace Room
 	currentPlace = groundFloor
 
-	for {
+	exitGame := false
+
+	for !exitGame {
 		if userInput == "backpack" {
 			fmt.Printf("Here's what you have in your backpack 🎒 %v\n", backpack)
 		}
@@ -101,7 +103,7 @@ func main() {
 		fmt.Println("You are currently in:", currentPlace.Name)
 		fmt.Println("Description:", currentPlace.Description+"\n")
 		if currentPlace != discoBall {
-			fmt.Println("Where do you want to go! \nYou currently have a backpack with you and if you want to look at what you have in it, just type `backpack` at any point.")
+			fmt.Println("Where do you want to go?")
 		}
 
 		switch currentPlace.Name {
@@ -170,10 +172,23 @@ func main() {
 				fmt.Println("You've unlocked the room with the key in your backpack!🔓Do you wanna take a look around? [Yes/No]")
 				fmt.Scanln(&userInput)
 				if userInput == "Yes" {
-					navigationMenu()
-					fmt.Scanln(&userInput)
-					clearScreen()
+					fmt.Println("You spot a golden object... You approach it and realise it's the GOLDEN LAPTOP 💻")
+					fmt.Println(
+						" ______________\n" +
+							"||            ||\n" +
+							"||            ||\n" +
+							"||            ||\n" +
+							"||            ||\n" +
+							"||____________||\n" +
+							"|______________|\n" +
+							" \\\\############\\\\\n" +
+							"  \\\\############\\\\\n" +
+							"   \\      ____    \\   \n" +
+							"    \\_____\\___\\____\\\n")
+					fmt.Println("You have become a backend engineer. Good luck on your journey! 💛")
+					exitGame = true
 				}
+
 			} else {
 				clearScreen()
 				fmt.Println("This room is locked 🔐\n")
@@ -209,7 +224,6 @@ func main() {
 						fmt.Println("\nYou look forward and spot a shinny object... As you look closer you notice it's a key! 🔑 " +
 							"Do you want to put it in your backpack? [Yes/No]\n")
 						fmt.Scanln(&userInput)
-						clearScreen()
 						if userInput == "Yes" {
 							item := "key"
 							backpack = append(backpack, item)
